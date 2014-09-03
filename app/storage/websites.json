@@ -1,0 +1,18 @@
+[
+    {
+        "name": "freebies",
+        "items": [
+            {"name": "Psd", "url": "google.com"},
+            {"name": "surface", "url": "google.com"},
+            {"name": "exit", "url": "google.com"}
+        ]
+    },
+    {
+        "name": "psd",
+        "items": [
+            {"name": "Psd", "url": "google.com"},
+            {"name": "surface", "url": "google.com"},
+            {"name": "exit", "url": "google.com"}
+        ]
+    }
+]
