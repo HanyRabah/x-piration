@@ -9,11 +9,10 @@ The website is built using [yo](http://yeoman.io/) and generator-angular. To run
 Kick start:
 
 ```
-git clone git@github.com:HanyRabah/x-piration.git
-cd x-piration
-$ git checkout website
+$ git clone git@github.com:HanyRabah/x-piration.git
+$ cd x-piration
 $ npm install 
 $ bower install
-$ grunt server
+$ grunt serve
 
 ```
