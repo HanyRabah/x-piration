@@ -1,0 +1,9 @@
+firebase.json
+node_modules
+de_modules
+dist
+.tmp
+.sass-cache
+bower_components
+test
+

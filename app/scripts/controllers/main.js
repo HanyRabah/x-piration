@@ -8,21 +8,53 @@
  * Controller of the designersListApp
  */
 angular.module('designersListApp')
-    .controller('MainCtrl', function($scope, jsonFactory) {
-        $scope.categories = {};
+    .controller('MainCtrl', ['$scope', '$routeParams', '$route', 'jsonFactory',
+        function($scope, $routeParams, $route, jsonFactory) {
+
+
+
+            jsonFactory.getIt().then(function(data) {
+                $scope.categories = data;
+            });
+            $scope.$on('handleCategories', function(events, data) {
+                $scope.categories = data;
+            });
+
+            $scope.save = function(formData) {
+                console.log(formData);
+                $routeParams = $.param({ 
+                    "name": formData.name,
+                    "url": formData.url
+                })
+                jsonFactory.saveIt($routeParams,formData.category);
+
+            }
+        }
+
+            /*$scope.categories = {};
+        $scope.allCategories = {}
         jsonFactory.getInspirationStuff()
             .then(function(data) {
                 $scope.categories = data;
+                $scope.website.category = data;
             }, function(error) {
                 console.error(error);
             });
 
-           $scope.items = [
-           {url: 'http://google.com', name: 'Google'},
-           {url: 'http://google.com', name: 'yahoo'},
-           {url: 'http://google.com', name: 'bengo'},
-           {url: 'http://google.com', name: 'hany'},
-           {url: 'http://google.com', name: 'omar'}
-           ]
 
-    });
+        $scope.save = function() {
+
+            $params = $.param({
+                "name": website.name,
+                "url": website.url,
+            })
+            sharedBooks.jsonSave($params);
+
+
+
+
+        };
+*/
+
+
+    ]);
