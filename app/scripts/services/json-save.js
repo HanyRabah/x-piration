@@ -8,8 +8,11 @@
  * Factory in the designersListApp.
  */
 angular.module('designersListApp')
-  .factory('jsonSave', function () {
+  .factory('addNewWebsite', function () {
     // Service logic
 
-    return $resource('storage/websites.json');
+    return $resource('storage/websites.json',
+	    { todoId:'@_id' },
+	    { update: { method: 'PUT' }}
+    );
   });

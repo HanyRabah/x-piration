@@ -30,26 +30,10 @@ angular.module('designersListApp')
                             data: $params,
                         })
                         .success(function(addData) {
-                            alert('success');
-                            categories = addData;
+                                categories = addData;
                             $rootScope.$broadcast('handleCategories', categories);
                         });
                 }
             };
         }
     ]);
-
-/*return {
-            getInspirationStuff: function() {
-                var deferred = $q.defer(),
-                    httpPromise = $http.get('storage/websites.json');
-
-                httpPromise.then(function(response) {
-                    deferred.resolve(response.data);
-                }, function(error) {
-                    console.log(error);
-                });
-
-                return deferred.promise;
-            }
-        }*/

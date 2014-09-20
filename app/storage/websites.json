@@ -4,7 +4,10 @@
         "items": [
             {"name": "Psd", "url": "google.com"},
             {"name": "surface", "url": "google.com"},
-            {"name": "exit", "url": "google.com"}
+            {"name": "exit", "url": "google.com"},
+            {"name": "Psd", "url": "google.com"},
+            {"name": "surface", "url": "google.com"},
+            {"name": "xxx", "url": "google.com"}
         ]
     },
     {
@@ -15,4 +18,4 @@
             {"name": "exit", "url": "google.com"}
         ]
     }
-]
+] 
