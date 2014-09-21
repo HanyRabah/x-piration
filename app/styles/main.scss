@@ -1,92 +1,201 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
+@import "triangle.scss";
 
 .browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
 }
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+    padding-bottom: 20px;
+    background: #eee;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+    padding: 20px;
+    background: #BCD630;
+    border-bottom: 1px solid #e5e5e5;
+    /* Make the masthead heading the same height as the navigation */
+    h3 {
+        color: #fff;
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 40px;
+        padding-bottom: 19px;
+    }
+}
 
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
+.nav-pills {
+    li {
+        a {
+            &:hover {
+                background: #d93600;
+            }
+        }
+    }
+}
+
+.search-wrapper {
+    background: #fff;
+    border-bottom: 1px solid #999;
+    padding: 15px 0;
+    h3 {
+        margin: 10px 0;
+        padding: 0;
+    }
 }
 
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
 }
 
-.container-narrow > hr {
-  margin: 30px 0;
+.masonry-wrapper {
+    margin: 0;
+    padding: 0;
+    .masonry-brick {
+        display: none;
+        clear: both;
+        margin-bottom: 20px;
+        h4 {
+            padding: 0px;
+            margin: 20px 0 10px;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            box-shadow: 0px 0px 1px #999;
+            li {
+                border-bottom: 1px solid #eee;
+                position: relative;
+                .tags {
+                    position: absolute;
+                    top: 11px;
+                    right: 6px;
+                    font-size: 12px;
+                    border-radius: 4px;
+                    padding: 2px 5px;
+                    color: #fff;
+                    div {
+                        display: inline-block;
+                        &.red {
+                            color: #d93600;
+                        }
+                        &.orange {
+                            color: #ff5c26;
+                        }
+                        &.yellow {
+                            color: #ffdb17;
+                        } 
+                        &.show-icon {
+                            display:  inline-block!important
+                        }
+                    }
+                }
+                a {
+                    padding: 10px;
+                    display: block;
+                    color: #333;
+                    &:hover {
+                        color: #fff;
+                        background: #BCD630;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+        &.loaded {
+            display: block;
+        }
+    }
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+.panel-add-category {
+    background: #fff;
+    border-bottom: 1px solid #999;
+    padding: 10px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-
-  p + h4 {
-    margin-top: 28px;
-  }
+.panel-list-wrapper {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+        float: left;
+        margin: 1%;
+        padding: 0px;
+        border-bottom: 1px solid #eee;
+        width: 23%;
+        > h4 {
+            padding: 10px;
+            margin: 0;
+            padding-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            box-shadow: 0px 0px 1px #999;
+            li {
+                float: none;
+                background: none;
+                box-shadow: none;
+                width: 100%;
+                clear: both;
+                position: relative;
+                .edit-form {
+                    position: absolute;
+                    top: 40px;
+                    padding: 10px;
+                    width: 100%;
+                    z-index: 100;
+                    background: #ffdb17;
+                    left: -2px;
+                    box-shadow: 0px 1px 3px #d93600;
+                    border-radius: 3px;
+                    &:before {
+                        @include triangle($direction: top, $position: top -7px left 20px, $color: #d93600, $size: 5px);
+                    }
+                }
+                a {
+                    color: #000;
+                    padding: 10px;
+                    display: block;
+                    width: 100%;
+                    &:hover {
+                        background: #eee;
+                    }
+                }
+                .actions {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                }
+            }
+        }
+    }
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
+@media screen and (min-width: 768px) {}

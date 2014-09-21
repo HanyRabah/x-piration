@@ -1,0 +1,51 @@
+<div class="container">
+
+    <h2>Submit website</h2>
+
+    <div class="col-md-6">
+        <p>Would you like to suggest a website? Please use this form. Unfortunately we cannot accept every submission.</p>
+
+        <p>We’ll review your website to determine whether it meets our guidelines. We will not publish websites which do not meet our overall quality standards</p>
+    </div>
+    <div class="col-md-6">
+        <form id="submitForm" name="submitform" ng-submit="submitForm()" novalidate>
+
+            <!-- NAME -->
+            <div class="form-group" ng-class="{ 'has-error' : submitform.name.$invalid && !submitform.name.$pristine }">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" ng-model="submitformdata.name" required>
+                <p ng-show="submitform.name.$invalid && !submitform.name.$pristine" class="help-block">You name is required.</p>
+            </div>
+            <!-- EMAIL -->
+            <div class="form-group" ng-class="{ 'has-error' : submitform.email.$invalid && !submitform.email.$pristine }">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" ng-model="submitformdata.email" required>
+                <p ng-show="submitform.email.$invalid && !submitform.email.$pristine" class="help-block">Enter a valid email.</p>
+            </div>
+
+
+            <!-- WebsiteName -->
+            <div class="form-group" ng-class="{ 'has-error' : submitform.websitename.$invalid && !submitform.websitename.$pristine }">
+                <label>Website Name</label>
+                <input type="text" name="websitename" class="form-control" ng-model="submitformdata.websitename" ng-minlength="3" required>
+                <p ng-show="submitform.websitename.$error.minlength" class="help-block">Website Name is too short.</p>
+            </div>
+
+            <!-- Website Url -->
+            <div class="form-group" ng-class="{ 'has-error' : submitform.websiteurl.$invalid && !submitform.websiteurl.$pristine }">
+                <label>Website Url</label>
+                <input type="text" name="websiteurl" class="form-control" ng-model="submitformdata.websiteurl" ng-minlength="3" required>
+                <p ng-show="submitform.websiteurl.$error.minlength" class="help-block">Website Url is too short.</p>
+            </div>
+
+
+            <button id="submitBtn" type="submit" class="btn btn-danger" ng-disabled="submitform.$invalid" data-loading-text="Sending...">Submit</button>
+
+        </form>
+    </div>
+</div>
+<br/>
+
+<script type="text/javascript">
+$('.nav-pills').hide();
+</script>

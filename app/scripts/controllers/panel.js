@@ -19,4 +19,7 @@ angular.module('designersListApp')
         $scope.editItem = function(category, itemKey, input) {
             firebaseUrl.editItem(category, itemKey, input);
         }
+         $scope.addNewCategory = function(input) {
+            firebaseUrl.addCategory(input);
+        }
     });

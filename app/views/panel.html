@@ -1,50 +1,115 @@
-<div class="form-horizontal" ng-controller="PanelCtrl">
-    <div class="form-group">
-        <legend>Enter New Value</legend>
-    </div>
+<div ng-controller="PanelCtrl">
 
-    <ul>
-        <li ng-repeat="(catkey, category) in categories | filter:search">
-            <h2>{{ catkey }}</h2>
+    <div class="row panel-add-category">
+        <div class="container">
+            <div class="col-md-12">
+                <h4>Add New Category</h4>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="text" ng-model="AddCatinput.name" class="form-control" placeholder="Category Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" ng-model="AddCatinput.description" class="form-control" placeholder="Category Description">
+                    </div>
+                    <button type="submit" ng-click="addNewCategory(AddCatinput)" class="btn btn-default"><i class="glyphicon glyphicon-floppy-saved"></i> Save</button>
 
-            <button ng-click="AddDetails = ! AddDetails"><i class="glyphicon  glyphicon-plus"></i>
-            </button>
-            <div ng-modal="edit" ng-class="{ 'hidden': ! AddDetails }">
-                <input ng-model="input.name" value="" placeholder="name" />
-                <input ng-model="input.url" value="" placeholder="url" />
-                <button ng-click="addNewItem(catkey, input)"><i class="glyphicon glyphicon-floppy-saved"></i>
-                </button>
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <masonry class="panel-list-wrapper col-md-12">
+                <li ng-repeat="(catKey, list) in categories | filter:search" class="masonry-brick">
+                    <h4>
+                        {{ list.category.name }}
+                        <button class="btn btn-default pull-right btn-sm" data-toggle="modal" data-target="#{{list.category.name | nospace}}"><i class="glyphicon  glyphicon-plus"></i>
+                        </button>
+                    </h4>
 
-            <ul>
-                <li ng-repeat="(itemkey, item)  in category">
-
-                    <a href="{{item.url}}" target="_blank" ng-class="{ 'hidden':  editDetails }">{{item.name}}</a>
-
-                    <div ng-modal="edit" ng-class="{ 'hidden': ! editDetails }">
-                        <input ng-model="itemInput.name" value="{item.name}"/>
-                        <input ng-model="itemInput.url" value="{item.url}"/>
+                    <div class="modal fade" id="{{list.category.name | nospace}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">Add New Item to {{list.category.name}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Item Name</label>
+                                        <input type="text" ng-model="Addinput.name" required class="form-control" placeholder="Item Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Item Url</label>
+                                        <input type="text" ng-model="Addinput.url" required class="form-control" placeholder="Item Url">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-model="Addinput.free"> It's Free
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                                    <button ng-click="addNewItem(list.category.name,Addinput)" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"> Save</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
 
-                    <button ng-click="editDetails = ! editDetails" ng-class="{ 'hide':  editDetails}">
-                        <i class="glyphicon" ng-class="{ 'glyphicon-pencil': ! editDetails}"></i>
-                    </button>
+                    <ul>
+                        <li ng-repeat="(key, item) in list.items">
+                            <a href="{{item.url}}" target="_blank" >{{item.name}}</a>
 
-                    <button ng-click="editItem(catkey, itemkey, itemInput); editDetails = ! editDetails" ng-class="{ 'hide':  !editDetails }">
-                        <i class="glyphicon glyphicon-floppy-saved"></i>
-                    </button>
+                            <div class="edit-form" ng-modal="edit" ng-class="{ 'hidden': ! editDetails }">
+                                <div class="form-group">
+                                    <label>Item Name</label>
+                                    <input class="form-control input-sm" required ng-model="item.name" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Item Url</label>
+                                    <input class="form-control input-sm" required ng-model="item.url" />
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="item.free"> It's Free
+                                    </label>
+                                </div>
 
-                    <button ng-click="removeItem(catkey, itemkey )"><i class="glyphicon glyphicon-remove"></i>
-                    </button>
+                                <hr/>
+                                <div ng-click="editItem(list.category.name, key, item); editDetails = ! editDetails" ng-class="{ 'hide':  !editDetails }" class="btn btn-danger btn-sm">
+                                    <i class="glyphicon glyphicon-floppy-saved"> save</i>
+                                </div>
+                                <div ng-click=" editDetails = ! editDetails" class="btn btn-default btn-sm">
+                                    <i class="glyphicon glyphicon-times"> cancel</i>
+                                </div>
+                            </div>
+                            <div class="actions">
+                                <div ng-click="editDetails = ! editDetails" ng-class="{ 'hide':  editDetails}" class="btn  btn-sm">
+                                    <i class="glyphicon" ng-class="{ 'glyphicon-pencil': ! editDetails}"></i>
+                                </div>
 
-                    <!--  -->
-                </li>
+                                <div ng-click="removeItem(list.category.name, key )" class="btn btn-sm"><i class="glyphicon glyphicon-remove"></i>
+                                </div>
+                            </div>
+
+
+
+                            <!--  -->
+                        </li>
+            </masonry>
+
+            </li>
             </ul>
-
-        </li>
-
-    </ul>
+        </div>
+    </div>
 </div>
-    <div>{{msg}}</div>
+<script type="text/javascript">
+$('.nav-pills').hide();
+</script>
